@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
       borderColor: 'gray',
       borderWidth: 1,
       width: '80%',
-      marginBottom: 20,
+      marginBottom: 10,
       paddingLeft: 10,
       borderRadius: 10
     },
@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
     },
     buttonContainer: {
       width: '80%',
-      borderRadius: 20,
+      borderRadius: 10,
       overflow: 'hidden',
       backgroundColor: '#ff5b00',
       alignItems: 'center',
@@ -86,7 +86,7 @@ export const styles = StyleSheet.create({
     },
     error: {
       marginBottom: 30,
-      backgroundColor: '#8b0003',
+      backgroundColor: '#63b0b5',
       width: '80%',
       borderRadius: 10,
       height: 40,

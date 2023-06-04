@@ -36,13 +36,13 @@ export default function App() {
         <View style={styles.formContainer}>
 
           {error && <View style={styles.error}><Text style={{ color: 'white' }}>{error}</Text></View>}
-
           <Text style={styles.label}>Email</Text>
           <TextInput
             style={styles.input}
             value={email}
             onChangeText={setEmail}
           />
+
 
           <Text style={styles.label}>Senha</Text>
           <View style={styles.passwordInputContainer}>
