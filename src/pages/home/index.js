@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../../context/auth';
+
 import { Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
 import { FontAwesome } from 'react-native-vector-icons';
 import { styles } from './estilo.js';
@@ -9,6 +11,8 @@ export default function Home({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setErro] = useState(false);
+  const { FazerLogin } = useContext(AuthContext);
+
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -21,7 +25,8 @@ export default function Home({ navigation }) {
     }
     setErro(false);
 
-    navigation.navigate('Indicadores');
+    FazerLogin();  
+    // navigation.navigate('Indicadores');
   };
 
 
