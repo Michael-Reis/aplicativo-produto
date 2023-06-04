@@ -28,7 +28,7 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.divlogo}>
-        <Image source={require('../../assets/logo-orit.png')} style={styles.logo} />
+        <Image source={require('../../../assets/logo-orit.png')} style={styles.logo} />
       </View>
 
       <View style={styles.cardlogin}>
