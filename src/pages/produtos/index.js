@@ -1,10 +1,11 @@
-import { StyleSheet, View, Text, ScrollView, Image, TextInput, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image, TextInput, ActivityIndicator, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-export default function Produtos() {
+export default function Produtos({ navigation }) {
   const [produtos, setProdutos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function GetProdutos() {
@@ -18,16 +19,23 @@ export default function Produtos() {
     GetProdutos();
   }, []);
 
-  if (isLoading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#ff5b00" />
-      </View>
-    );
+  async function CarregarMaisProdutos() {
+
+    setIsLoading(true);
+    const response = await fetch(`https://www.orit.com.br/web_api/products?page=${page}`);
+    const dados = await response.json();
+    const lista_produtos_page = dados.Products;
+    setProdutos([...produtos, ...lista_produtos_page]);
+    setPage(page + 1);
+    setIsLoading(false);
+
+
   }
 
+
+
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.pesquisarProduto}>
         <MaterialIcons name="search" size={24} color="#fff" style={styles.icon} />
         <TextInput
@@ -36,37 +44,56 @@ export default function Produtos() {
           placeholderTextColor="#fff"
         />
       </View>
-      <ScrollView contentContainerStyle={styles.container}>
-        {produtos.map((produto, key) => {
-          return (
-            <View style={styles.product} key={key}>
-              <View style={styles.imageContainer}>
-                <Image source={{ uri: produto.Product.ProductImage[0].thumbs['180'].https }} style={styles.image} />
-              </View>
-              <View style={styles.infoContainer}>
-                {produto.Product.brand && <Text style={styles.brand}>{produto.Product.brand}</Text>}
-                <Text style={styles.name}>{produto.Product.name}</Text>
-                <Text style={styles.price}>R$ {produto.Product.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
-              </View>
+      <FlatList
+        data={produtos}
+        numColumns={2}
+        renderItem={(produto) => (
+          <TouchableOpacity style={styles.product} onPress={() => navigation.navigate('DETALHE', { productId: produto.item.Product.id })}>
+            <View style={styles.imageContainer}>
+              <Image source={{ uri: produto.item.Product?.ProductImage[0].thumbs['180'].https }} style={styles.image} />
             </View>
-          );
-        })}
-      </ScrollView>
-    </View>
+            <View style={styles.infoContainer}>
+              {produto.item.Product.brand && <Text style={styles.brand}>{produto.item.Product.brand}</Text>}
+              <Text style={styles.name}>{produto.item.Product.name}</Text>
+              <Text style={styles.price}>R$ {produto.item.Product.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
+            </View>
+          </TouchableOpacity>
+
+        )}
+        showsVerticalScrollIndicator={false}
+        // keyExtractor={(item) => item.Product.id.toString()}
+        onEndReached={() => {
+          CarregarMaisProdutos();
+        }}
+
+      />
+
+      {isLoading && <View style={styles.loadingContainer}><ActivityIndicator size="large" color="#ff5b00" /></View>}
+    </View >
   );
 }
 
 const styles = StyleSheet.create({
+
   container: {
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    position: 'relative',
+    flex: 1,
   },
+  loadingContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    backgroundColor: '#fff',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    opacity: 0.5,
+    zIndex: 1000,
+  },
+
   product: {
-    width: '48%',
+    width: '50%',
     height: 220,
     marginBottom: 10,
     paddingHorizontal: 10,
@@ -107,19 +134,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#ff5b00',
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: 5
   },
   input: {
     flex: 1,
     marginLeft: 10,
-    color: '#fff',
+    color: '#fff'
   },
   icon: {
-    marginRight: 10,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+    marginRight: 10
+  }
 });

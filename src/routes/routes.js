@@ -6,6 +6,7 @@ import { AuthContext } from "../context/auth"
 export const Routes = () => {
 
     const { ativo } = useContext(AuthContext);
-    return ativo ? <RouterAuth /> : <RouterApp />
+    // return ativo ? <RouterAuth /> : <RouterApp />
+    return <RouterAuth />
 
 }
