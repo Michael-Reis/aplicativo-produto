@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "orit",
-    "slug": "orit",
+    "slug": "aplicativo-produto",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "be1e4eca-e3bb-41ba-90f2-5ef25825c690"
+      }
+    },
+    "owner": "michaelreis"
   }
 }

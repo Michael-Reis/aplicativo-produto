@@ -24,7 +24,6 @@ export default function Produto({ navigation }) {
             const response = await fetch(`https://www.orit.com.br/web_api/products/${productId}`);
             const data = await response.json();
             const produto = data.Product;
-            console.log(data.Product)
             setProduto(produto);
             setProdutoImagens(data.Product.ProductImage);
             setIsLoading(false);
