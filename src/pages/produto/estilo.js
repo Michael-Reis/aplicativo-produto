@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { Dimensions } from 'react-native';
 
 export const styles = StyleSheet.create({
-
+    // comentarios
     container: {
         flex: 1,
         backgroundColor: '#fff',
