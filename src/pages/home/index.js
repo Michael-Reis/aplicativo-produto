@@ -40,7 +40,7 @@ export default function Home({ navigation }) {
 
 
         <View style={styles.formContainer}>
-
+    
           {error && <View style={styles.error}><Text style={{ color: 'white' }}>{error}</Text></View>}
           <Text style={styles.label}>Email</Text>
           <TextInput

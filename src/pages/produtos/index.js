@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, TouchableOpacity, Image, TextInput, ActivityIndicator, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { FiltroProduto } from '../../components/filtroProduto';
 
 export default function Produtos({ navigation }) {
   const [produtos, setProdutos] = useState([]);
@@ -43,6 +44,9 @@ export default function Produtos({ navigation }) {
           placeholder="Pesquisar"
           placeholderTextColor="#fff"
         />
+      </View>
+      <View >
+        <FiltroProduto/>
       </View>
       <FlatList
         data={produtos}
@@ -134,7 +138,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#ff5b00',
     paddingHorizontal: 10,
-    paddingVertical: 5
+    paddingVertical: 10
   },
   input: {
     flex: 1,

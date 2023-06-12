@@ -8,14 +8,14 @@ export const styles = StyleSheet.create({
     },
     divlogo: {
       width: '100%',
-      height: '20%',
+      height: '40%',
       backgroundColor: '#ff5b00',
       alignItems: 'center',
       justifyContent: 'center',
     },
     cardlogin: {
       backgroundColor: 'white',
-      height: '80%',
+      height: '60%',
       width: '100%',
       alignItems: 'center',
       borderTopLeftRadius: 10,
@@ -79,7 +79,7 @@ export const styles = StyleSheet.create({
       color: 'white',
     },
     logo: {
-      width: '30%',
+      width: '40%',
       height: undefined,
       aspectRatio: 1,
       resizeMode: 'contain'
